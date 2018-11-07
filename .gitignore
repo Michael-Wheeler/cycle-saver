@@ -1,0 +1,50 @@
+target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+
+### binaries ###
+*.jar
+*.war
+*.zip
+
+ee-my-account/core/src/main/resources/
+ee-my-account/statics/src/main/content/jcr_root/static/0005/
+
+# Ignore Mac DS_Store files
+.DS_Store
+
+
+# Ignore node modules
+node_modules/
+node
+npm
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Optional eslint cache
+.eslintcache

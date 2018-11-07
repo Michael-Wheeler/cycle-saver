@@ -1,0 +1,1 @@
+web: java -jar target/cycle-saver-1.0.jar

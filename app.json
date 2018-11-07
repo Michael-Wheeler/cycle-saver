@@ -1,0 +1,4 @@
+{
+  "name": "Cauculate Commute Savings",
+  "description": "A simple Heroku application to calculate the savings you have made by cycling or running to work.",
+}
