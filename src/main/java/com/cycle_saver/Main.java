@@ -61,17 +61,11 @@ public class Main {
         stravaController.filterCommutes(athlete);
 
         User user = new User();
-        athlete.getActivities().forEach(activity -> user.addJourney(new Journey(activity.getStartLatlng(), activity.getEndLatlng())));
-        user.getJourneys().forEach(journey -> System.out.println(journey.toString()));
-
         TFLController tfl = new TFLController();
-        user.getJourneys().forEach(journey -> {
-            try {
-                tfl.calculateJourney(journey, "421beaf3651ef6dcea93a05e0bb3dd86", "621b4307");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        athlete.getActivities().forEach(activity -> user.addJourney(tfl.calculateJourney(
+                activity,
+                "421beaf3651ef6dcea93a05e0bb3dd86",
+                "621b4307")));
         return "auth_strava";
     }
 
