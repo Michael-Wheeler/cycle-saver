@@ -1,4 +1,4 @@
-package com.cycle_saver.model;
+package com.cycle_saver.model.user;
 
 import java.lang.reflect.Array;
 import java.util.List;

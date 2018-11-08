@@ -1,4 +1,4 @@
-package com.cycle_saver.model;
+package com.cycle_saver.model.strava;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

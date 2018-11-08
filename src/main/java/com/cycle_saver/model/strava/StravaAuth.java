@@ -1,4 +1,4 @@
-package com.cycle_saver.model;
+package com.cycle_saver.model.strava;
 
 public class StravaAuth {
 
@@ -39,10 +39,10 @@ public class StravaAuth {
     }
 
     public String toString() {
-        return "StravaAuth{" +
-                "state='" + state + '\'' +
-                ", code='" + code + '\'' +
-                ", scope='" + scope + '\'' +
-                '}';
+        return "StravaAuth {" +
+                "state='" + state + "'" +
+                ", code='" + code + "'" +
+                ", scope='" + scope + "'" +
+                "}";
     }
 }

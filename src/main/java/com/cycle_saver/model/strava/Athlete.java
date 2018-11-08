@@ -1,5 +1,6 @@
-package com.cycle_saver.model;
+package com.cycle_saver.model.strava;
 
+import com.cycle_saver.model.Activity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -64,18 +65,6 @@ public class Athlete {
     @SerializedName("email")
     @Expose
     private String email;
-
-    private ArrayList<Activity> activities;
-
-    public ArrayList<Activity> getActivities() { return activities; };
-
-    public void setActivities(ArrayList<Activity> activities) {
-        this.activities = activities;
-    }
-
-    public void addActivity(Activity activity) {
-        this.activities.add(activity);
-    }
 
     public Integer getId() {
         return id;
@@ -227,6 +216,18 @@ public class Athlete {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    private ArrayList<Activity> activities;
+
+    public ArrayList<Activity> getActivities() { return activities; };
+
+    public void setActivities(ArrayList<Activity> activities) {
+        this.activities = activities;
+    }
+
+    public void addActivity(Activity activity) {
+        this.activities.add(activity);
     }
 
 }
