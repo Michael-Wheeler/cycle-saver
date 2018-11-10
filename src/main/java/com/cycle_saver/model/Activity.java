@@ -157,63 +157,6 @@ public class Activity {
         @Expose
         private Boolean hasKudoed;
 
-        public Activity() {
-        }
-
-        public Activity(Integer resourceState, Athlete athlete, String name, Double distance, Integer movingTime, Integer elapsedTime, Double totalElevationGain, String type, Object workoutType, Integer id, String externalId, Integer uploadId, String startDate, String startDateLocal, String timezone, Integer utcOffset, List<Double> startLatlng, List<Double> endLatlng, Object locationCity, Object locationState, String locationCountry, Double startLatitude, Double startLongitude, Integer achievementCount, Integer kudosCount, Integer commentCount, Integer athleteCount, Integer photoCount, Map map, Boolean trainer, Boolean commute, Boolean manual, Boolean _private, String visibility, Boolean flagged, String gearId, Boolean fromAcceptedTag, Double averageSpeed, Double maxSpeed, Double averageWatts, Double kilojoules, Boolean deviceWatts, Boolean hasHeartrate, Boolean heartrateOptOut, Boolean displayHideHeartrateOption, Double elevHigh, Double elevLow, Integer prCount, Integer totalPhotoCount, Boolean hasKudoed) {
-            super();
-            this.resourceState = resourceState;
-            this.athlete = athlete;
-            this.name = name;
-            this.distance = distance;
-            this.movingTime = movingTime;
-            this.elapsedTime = elapsedTime;
-            this.totalElevationGain = totalElevationGain;
-            this.type = type;
-            this.workoutType = workoutType;
-            this.id = id;
-            this.externalId = externalId;
-            this.uploadId = uploadId;
-            this.startDate = startDate;
-            this.startDateLocal = startDateLocal;
-            this.timezone = timezone;
-            this.utcOffset = utcOffset;
-            this.startLatlng = startLatlng;
-            this.endLatlng = endLatlng;
-            this.locationCity = locationCity;
-            this.locationState = locationState;
-            this.locationCountry = locationCountry;
-            this.startLatitude = startLatitude;
-            this.startLongitude = startLongitude;
-            this.achievementCount = achievementCount;
-            this.kudosCount = kudosCount;
-            this.commentCount = commentCount;
-            this.athleteCount = athleteCount;
-            this.photoCount = photoCount;
-            this.map = map;
-            this.trainer = trainer;
-            this.commute = commute;
-            this.manual = manual;
-            this._private = _private;
-            this.visibility = visibility;
-            this.flagged = flagged;
-            this.gearId = gearId;
-            this.fromAcceptedTag = fromAcceptedTag;
-            this.averageSpeed = averageSpeed;
-            this.maxSpeed = maxSpeed;
-            this.averageWatts = averageWatts;
-            this.kilojoules = kilojoules;
-            this.deviceWatts = deviceWatts;
-            this.hasHeartrate = hasHeartrate;
-            this.heartrateOptOut = heartrateOptOut;
-            this.displayHideHeartrateOption = displayHideHeartrateOption;
-            this.elevHigh = elevHigh;
-            this.elevLow = elevLow;
-            this.prCount = prCount;
-            this.totalPhotoCount = totalPhotoCount;
-            this.hasKudoed = hasKudoed;
-        }
-
         public Integer getResourceState() {
             return resourceState;
         }

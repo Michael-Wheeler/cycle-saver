@@ -3,6 +3,7 @@ package com.cycle_saver.model;
 import java.util.ArrayList;
 
 public class User {
+
     private ArrayList<Journey> journeys;
 
     public User(ArrayList<Journey> journeys) {
