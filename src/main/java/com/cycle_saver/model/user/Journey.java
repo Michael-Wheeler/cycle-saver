@@ -1,39 +1,47 @@
 package com.cycle_saver.model.user;
 
-import java.lang.reflect.Array;
-import java.util.List;
-
 public class Journey {
-    private List start_latlng;
-    private List end_latlng;
 
-    public Journey(List start_latlng, List end_latlng) {
-        this.start_latlng = start_latlng;
-        this.end_latlng = end_latlng;
+    private int activity_id;
+    private int totalCost;
+    private int duration;
+
+    public Journey(int activity_id, int totalCost, int duration) {
+        this.activity_id = activity_id;
+        this.totalCost = totalCost;
+        this.duration = duration;
     }
 
-    public List getStart_latlng() {
-        return start_latlng;
+    public int getActivity_id() {
+        return activity_id;
     }
 
-    public void setStart_latlng(List start_latlng) {
-        this.start_latlng = start_latlng;
+    public void setActivity_id(int activity_id) {
+        this.activity_id = activity_id;
     }
 
-    public List getEnd_latlng() {
-        return end_latlng;
+    public int getTotalCost() {
+        return totalCost;
     }
 
-    public void setEnd_latlng(List end_latlng) {
-        this.end_latlng = end_latlng;
+    public void setTotalCost(int totalCost) {
+        this.totalCost = totalCost;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     @Override
     public String toString() {
         return "Journey{" +
-                "start_latlng=" + start_latlng +
-                ", end_latlng=" + end_latlng +
+                "activity_id=" + activity_id +
+                ", totalCost=" + totalCost +
+                ", duration=" + duration +
                 '}';
     }
 }
