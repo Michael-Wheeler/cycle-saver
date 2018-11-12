@@ -29,7 +29,7 @@ import java.util.List;
 
 public class StravaController {
 
-    public void getRoutes(Athlete athlete, String accessToken) throws IOException {
+    public void getActivities(Athlete athlete, String accessToken) throws IOException {
         HttpClient httpclient = HttpClients.createDefault();
         URI uri = null;
         try {
@@ -37,6 +37,7 @@ public class StravaController {
                     .setScheme("https")
                     .setHost("www.strava.com")
                     .setPath("/api/v3/athletes/" + athlete.getId() + "/activities")
+                    .setParameter("per_page", "200")
                     .setParameter("access_token", accessToken)
                     .build();
         } catch (URISyntaxException e) {

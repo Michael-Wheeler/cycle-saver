@@ -556,4 +556,20 @@ public class Activity {
         public void setHasKudoed(Boolean hasKudoed) {
             this.hasKudoed = hasKudoed;
         }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "athlete=" + athlete +
+                ", name='" + name + '\'' +
+                ", distance=" + distance +
+                ", elapsedTime=" + elapsedTime +
+                ", startDate='" + startDate + '\'' +
+                ", startLatlng=" + startLatlng +
+                ", endLatlng=" + endLatlng +
+                ", locationCity=" + locationCity +
+                ", locationState=" + locationState +
+                ", commute=" + commute +
+                '}';
+    }
 }

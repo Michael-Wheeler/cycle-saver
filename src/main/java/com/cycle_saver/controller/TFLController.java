@@ -24,7 +24,7 @@ public class TFLController {
         CoordinatesFormatter coordinatesFormatter = new CoordinatesFormatter();
         String startCoordinates = coordinatesFormatter.main(activity.getStartLatlng());
         String endCoordinates = coordinatesFormatter.main(activity.getEndLatlng());
-
+        System.out.println(activity.getStartDate());
         HttpClient httpclient = HttpClients.createDefault();
         URI uri = null;
         try {

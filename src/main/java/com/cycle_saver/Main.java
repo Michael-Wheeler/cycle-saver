@@ -56,16 +56,23 @@ public class Main {
         System.out.println(athlete.getId());
 
         StravaController stravaController = new StravaController();
-        stravaController.getRoutes(athlete, "e2192a3cebe2872cc31c4df1b3515b1ad4148abf");
+        stravaController.getActivities(athlete, "e2192a3cebe2872cc31c4df1b3515b1ad4148abf");
         System.out.println("FILTERING COMMUTES");
         stravaController.filterCommutes(athlete);
 
         User user = new User();
         TFLController tfl = new TFLController();
-        athlete.getActivities().forEach(activity -> user.addJourney(tfl.calculateJourney(
-                activity,
-                "421beaf3651ef6dcea93a05e0bb3dd86",
-                "621b4307")));
+
+        System.out.println(athlete.getActivities().size());
+        athlete.getActivities()
+                .removeIf(activity -> activity.getStartLatlng() == activity.getEndLatlng());
+        System.out.println(athlete.getActivities().size());
+        athlete.getActivities()
+                .forEach(activity -> user.addJourney(tfl.calculateJourney(
+                        activity,
+                        "421beaf3651ef6dcea93a05e0bb3dd86",
+                        "621b4307"))
+                );
         return "auth_strava";
     }
 
