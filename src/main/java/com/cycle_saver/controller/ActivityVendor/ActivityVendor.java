@@ -5,7 +5,8 @@ import com.cycle_saver.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ActivityVendor {
-    public ArrayList<Activity> extractActivities(User user) throws IOException;
+    public List<Activity> extractActivities(User user) throws IOException;
 }

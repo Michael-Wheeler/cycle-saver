@@ -4,10 +4,11 @@ import com.cycle_saver.controller.ActivityVendor.StravaController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
-@Controller
+@RestController
 
 public class RESTController {
     @RequestMapping("/")
@@ -38,6 +39,7 @@ public class RESTController {
 //                        "421beaf3651ef6dcea93a05e0bb3dd86",
 //                        "621b4307"))
 //                );
+
         return "dashboard";
     }
 }

@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StravaController implements ActivityVendor {
 
@@ -37,7 +38,13 @@ public class StravaController implements ActivityVendor {
         //TODO return user.Id();
     }
 
-    public ArrayList<Activity> extractActivities(User user) throws IOException {
+    public List<Activity> getCommutes(User user) {
+        List<Activity> routesResponse = extractActivities(user);
+
+        return filterCommutes(routesResponse);
+    }
+
+    public List<Activity> extractActivities(User user) {
         String accessToken = "e2192a3cebe2872cc31c4df1b3515b1ad4148abf";
 
         String stravaId = "1118050";
@@ -58,22 +65,26 @@ public class StravaController implements ActivityVendor {
         }
         HttpGet httpget = new HttpGet(uri);
 
-        HttpResponse response = httpclient.execute(httpget);
-        HttpEntity entity = response.getEntity();
-        InputStream instream = entity.getContent();
-        String output = IOUtils.toString(instream, "UTF-8");
-        ArrayList<Activity> activities = parseActivitiesResponse(output);
 
-        return filterCommutes(activities);
+        String output = null;
+        try {
+            HttpResponse response = httpclient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            InputStream instream = entity.getContent();
+            output = IOUtils.toString(instream, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        return parseActivitiesResponse(output);
     }
 
-    public ArrayList<Activity> parseActivitiesResponse(String response) {
+    public List<Activity> parseActivitiesResponse(String response) {
         return new Gson().fromJson(response, new TypeToken<ArrayList<Activity>>(){}.getType());
     }
 
-    public ArrayList<Activity> filterCommutes(ArrayList<Activity> activities) {
-        ArrayList<Activity> commutes = activities;
+    public List<Activity> filterCommutes(List<Activity> activities) {
+        List<Activity> commutes = activities;
         commutes.removeIf(activity -> !activity.getCommute());
 
         //TODO Remove this:
