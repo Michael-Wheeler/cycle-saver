@@ -21,9 +21,8 @@ import java.net.URISyntaxException;
 public class TFLController {
 
     public Journey calculateJourney(Activity activity, String app_key, String app_id) {
-        CoordinatesFormatter coordinatesFormatter = new CoordinatesFormatter();
-        String startCoordinates = coordinatesFormatter.main(activity.getStartLatlng());
-        String endCoordinates = coordinatesFormatter.main(activity.getEndLatlng());
+        String startCoordinates = CoordinatesFormatter.formatCoords(activity.getStartLatlng());
+        String endCoordinates = CoordinatesFormatter.formatCoords(activity.getEndLatlng());
 
         HttpClient httpclient = HttpClients.createDefault();
         URI uri = null;

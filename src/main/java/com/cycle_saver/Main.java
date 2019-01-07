@@ -21,6 +21,7 @@ import com.cycle_saver.controller.StravaController;
 import com.cycle_saver.controller.TFLController;
 import com.cycle_saver.model.*;
 
+import com.cycle_saver.service.UserDataService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -48,19 +50,18 @@ public class Main {
     String auth(@RequestParam(value = "state") String state,
                 @RequestParam(value = "code") String code,
                 @RequestParam(value = "scope") String scope) throws IOException {
-        StravaAuth stravaAuth = new StravaAuth(state, code, scope);
-        System.out.println("Authorisation Information is: " + stravaAuth.toString());
+        //get access token
         StravaAuthController stravaAuthController = new StravaAuthController();
-        StravaToken token = stravaAuthController.requestAccessToken(stravaAuth);
+        StravaToken token = stravaAuthController.getAccessToken(code);
+
+        //add user to mongo
+        User user = new User(token.getAthlete().getId(), token.getAccessToken());
+        UserDataService userDataService = new UserDataService();
+        userDataService.addUser(user);
         Athlete athlete = token.getAthlete();
-        System.out.println(athlete.getId());
-
         StravaController stravaController = new StravaController();
-        stravaController.getRoutes(athlete, "e2192a3cebe2872cc31c4df1b3515b1ad4148abf");
-        System.out.println("FILTERING COMMUTES");
-        stravaController.filterCommutes(athlete);
+        List<Activity> commuteActivities = stravaController.getCommutes(user);
 
-        User user = new User();
         TFLController tfl = new TFLController();
         athlete.getActivities().forEach(activity -> user.addJourney(tfl.calculateJourney(
                 activity,
