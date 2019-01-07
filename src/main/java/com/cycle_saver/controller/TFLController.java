@@ -32,6 +32,8 @@ public class TFLController {
                     .setScheme("https")
                     .setHost("api.tfl.gov.uk")
                     .setPath("/journey/journeyresults/" + startCoordinates + "/to/" + endCoordinates)
+                    .setParameter("time", "0900")
+                    .setParameter("nationalSearch", "true")
                     .setParameter("app_key", app_key)
                     .setParameter("app_id", app_id)
                     .build();
@@ -45,7 +47,7 @@ public class TFLController {
             HttpResponse response = httpclient.execute(httpget);
             HttpEntity entity = response.getEntity();
             InputStream instream = entity.getContent();
-             output = IOUtils.toString(instream, "UTF-8");
+            output = IOUtils.toString(instream, "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }

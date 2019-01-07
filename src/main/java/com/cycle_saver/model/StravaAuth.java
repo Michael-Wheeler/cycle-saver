@@ -39,7 +39,7 @@ public class StravaAuth {
     }
 
     public String toString() {
-        return "StravaAuth{" +
+        return "StravaAuthentication{" +
                 "state='" + state + '\'' +
                 ", code='" + code + '\'' +
                 ", scope='" + scope + '\'' +
