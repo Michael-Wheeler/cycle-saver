@@ -2,6 +2,8 @@ package com.cycle_saver.controller;
 
 import com.cycle_saver.model.StravaAuth;
 import com.cycle_saver.model.StravaToken;
+import com.cycle_saver.model.User;
+import com.cycle_saver.service.UserDataService;
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -19,6 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StravaAuthController {
+
+    public StravaToken getAccessToken(String code){
+        StravaAuth stravaAuth = new StravaAuth(code);
+        StravaToken token = null;
+        try {
+            token = requestAccessToken(stravaAuth);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+        return token;
+    }
 
     public StravaToken requestAccessToken(StravaAuth authResponse) throws IOException {
         HttpClient httpclient = HttpClients.createDefault();
