@@ -20,13 +20,13 @@ import java.net.URISyntaxException;
 
 public class TFLController {
 
-    public Journey calculateJourney(Activity activity, String app_key, String app_id) {
-        CoordinatesFormatter coordinatesFormatter = new CoordinatesFormatter();
-        String startCoordinates = coordinatesFormatter.main(activity.getStartLatlng());
-        String endCoordinates = coordinatesFormatter.main(activity.getEndLatlng());
-        System.out.println(activity.getStartDate());
+    public Journey calculateJourney(Activity activity) {
+        String startCoordinates = CoordinatesFormatter.formatCoords(activity.getStartLatlng());
+        String endCoordinates = CoordinatesFormatter.formatCoords(activity.getEndLatlng());
+
         HttpClient httpclient = HttpClients.createDefault();
         URI uri = null;
+        //TODO Remove TFL key and Id
         try {
             uri = new URIBuilder()
                     .setScheme("https")
@@ -34,26 +34,25 @@ public class TFLController {
                     .setPath("/journey/journeyresults/" + startCoordinates + "/to/" + endCoordinates)
                     .setParameter("time", "0900")
                     .setParameter("nationalSearch", "true")
-                    .setParameter("app_key", app_key)
-                    .setParameter("app_id", app_id)
+                    .setParameter("app_key", "421beaf3651ef6dcea93a05e0bb3dd86")
+                    .setParameter("app_id", "621b4307")
                     .build();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        HttpGet httpget = new HttpGet(uri);
-        System.out.println(httpget.getURI());
+
         String output = "";
         try {
+            HttpGet httpget = new HttpGet(uri);
             HttpResponse response = httpclient.execute(httpget);
             HttpEntity entity = response.getEntity();
-            InputStream instream = entity.getContent();
-            output = IOUtils.toString(instream, "UTF-8");
+            InputStream inStream = entity.getContent();
+            output = IOUtils.toString(inStream, "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //System.out.println(output);
+
         Journey journey = deserialezeJourneyResponse(output, activity.getId());
-        System.out.println(journey);
         return journey;
     }
 

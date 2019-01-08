@@ -19,7 +19,17 @@ import java.util.List;
 
 public class StravaAuthentication {
 
-    public StravaToken authenticateNewUser(String authCode) throws IOException {
+    public StravaToken getAccessToken(String authCode) {
+        StravaToken stravaToken = null;
+        try {
+            stravaToken = requestAccessToken(authCode);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return stravaToken;
+    }
+
+    public StravaToken requestAccessToken(String authCode) throws IOException {
         HttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost = new HttpPost("https://www.strava.com/oauth/token");
 
@@ -33,8 +43,8 @@ public class StravaAuthentication {
         HttpEntity entity = response.getEntity();
         InputStream inStream = entity.getContent();
         String accessTokenResponse = IOUtils.toString(inStream, "UTF-8");
-        StravaToken accessToken = parseAccessTokenResponse(accessTokenResponse);
-        return accessToken;
+        StravaToken stravaToken = parseAccessTokenResponse(accessTokenResponse);
+        return stravaToken;
     }
 
     public StravaToken parseAccessTokenResponse(String accessTokenResponse) {
