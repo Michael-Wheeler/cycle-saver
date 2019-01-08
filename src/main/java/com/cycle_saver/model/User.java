@@ -10,8 +10,7 @@ public class User {
     private ArrayList<Journey> journeys;
     private int totalSavings;
 
-    public User (int id) {
-        this.id = id;
+    public User() {
     }
 
     //TODO Remove this
@@ -55,9 +54,5 @@ public class User {
 
     public void setTotalSavings(int totalSavings) {
         this.totalSavings = totalSavings;
-    }
-
-    public void calculateTotalSavings() {
-        this.journeys.forEach(journey -> this.totalSavings =+ journey.getTotalCost());
     }
 }

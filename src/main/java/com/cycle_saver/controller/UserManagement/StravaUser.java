@@ -10,8 +10,8 @@ import com.cycle_saver.controller.ActivityVendor.StravaController;
 
 import java.util.List;
 
-public class StravaUser extends UserControllerimpl{
-    public User createUser(String authCode) {
+public class StravaUser extends BaseUserController {
+    public void createUser(String authCode) {
         StravaAuthentication stravaAuthentication = new StravaAuthentication();
         StravaToken stravaToken = stravaAuthentication.getAccessToken(authCode);
 
