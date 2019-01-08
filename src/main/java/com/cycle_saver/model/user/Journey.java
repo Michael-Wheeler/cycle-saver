@@ -1,4 +1,4 @@
-package com.cycle_saver.model;
+package com.cycle_saver.model.user;
 
 import com.cycle_saver.model.Strava.Activity;
 

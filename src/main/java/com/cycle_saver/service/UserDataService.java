@@ -1,7 +1,7 @@
 package com.cycle_saver.service;
 
-import com.cycle_saver.model.User;
 import com.cycle_saver.db.MongoDbConnection;
+import com.cycle_saver.model.user.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.UpdateResult;

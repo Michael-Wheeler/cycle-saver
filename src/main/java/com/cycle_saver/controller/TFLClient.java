@@ -1,7 +1,7 @@
 package com.cycle_saver.controller;
 
 import com.cycle_saver.model.Strava.Activity;
-import com.cycle_saver.model.Journey;
+import com.cycle_saver.model.user.Journey;
 import com.cycle_saver.utils.CoordinatesFormatter;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -19,6 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class TFLClient {
+
     public Journey calculateJourney(Activity activity) {
         String startCoordinates = CoordinatesFormatter.formatCoords(activity.getStartLatlng());
         String endCoordinates = CoordinatesFormatter.formatCoords(activity.getEndLatlng());
