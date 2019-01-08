@@ -1,5 +1,6 @@
 package com.cycle_saver.controller;
 
+import com.cycle_saver.controller.UserManagement.BaseUserController;
 import com.cycle_saver.controller.UserManagement.StravaUser;
 import com.cycle_saver.model.User;
 import org.springframework.stereotype.Controller;
@@ -21,15 +22,15 @@ public class RESTController {
                 @RequestParam(value = "code") String authCode,
                 @RequestParam(value = "scope") String scope) throws IOException {
 
-        StravaUser stravaUser = new StravaUser();
-        User user = stravaUser.createUser(authCode);
+        StravaUser BaseUserController = new StravaUser();
+        BaseUserController.createUser("Kill me");
 
-        return "redirect:/dashboard?totalSavings=" + user.getTotalSavings();
+        return "redirect:/dashboard?totalSavings=";// + user.getTotalSavings();
     }
 
     @RequestMapping("/dashboard")
     String userDashboard(Model model, @RequestParam(value = "userId") String userId){
-        model.addAttribute("totalSavings", db.getUser(id).getTotalSavings);
+        model.addAttribute("totalSavings", "Saving Will Display Here");
         return "userDashboard";
     }
 }

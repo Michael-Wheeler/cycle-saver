@@ -1,6 +1,6 @@
 package com.cycle_saver.controller;
 
-import com.cycle_saver.model.Activity;
+import com.cycle_saver.model.Strava.Activity;
 import com.cycle_saver.model.Journey;
 import com.cycle_saver.utils.CoordinatesFormatter;
 import org.apache.commons.io.IOUtils;
@@ -18,8 +18,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class TFLController {
-
+public class TFLClient {
     public Journey calculateJourney(Activity activity) {
         String startCoordinates = CoordinatesFormatter.formatCoords(activity.getStartLatlng());
         String endCoordinates = CoordinatesFormatter.formatCoords(activity.getEndLatlng());
@@ -52,16 +51,15 @@ public class TFLController {
             e.printStackTrace();
         }
 
-        Journey journey = deserialezeJourneyResponse(output, activity.getId());
+        Journey journey = deserialezeJourneyResponse(output, activity);
         return journey;
     }
 
-    private Journey deserialezeJourneyResponse(String response, int activity_id) {
+    private Journey deserialezeJourneyResponse(String response, Activity activity) {
         JSONObject jsonObject = new JSONObject(response);
         JSONArray journeys = jsonObject.getJSONArray("journeys");
         JSONObject journeyJSON = journeys.getJSONObject(0);
-        int duration = journeyJSON.getInt("duration");
         int totalCost = journeyJSON.getJSONObject("fare").getInt("totalCost");
-        return new Journey(activity_id, totalCost, duration);
+        return new Journey(activity, totalCost);
     }
 }

@@ -1,7 +1,9 @@
-package com.cycle_saver.controller.ActivityVendor;
+package com.cycle_saver.controller.Strava;
 
-import com.cycle_saver.model.Activity;
+import com.cycle_saver.model.Strava.Activity;
 import com.cycle_saver.model.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -10,9 +12,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
 
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -20,13 +19,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StravaController implements ActivityVendor {
-
-    public List<Activity> getCommutes(User user) {
-        List<Activity> activities = extractActivities(user);
-        return filterCommutes(activities);
-    }
-
+public class StravaClient {
     public List<Activity> extractActivities(User user) {
         HttpClient httpclient = HttpClients.createDefault();
         URI uri = null;
@@ -57,15 +50,9 @@ public class StravaController implements ActivityVendor {
         return parseActivitiesResponse(output);
     }
 
+
     public List<Activity> parseActivitiesResponse(String response) {
         return new Gson().fromJson(response, new TypeToken<ArrayList<Activity>>() {
         }.getType());
     }
-
-    public List<Activity> filterCommutes(List<Activity> activities) {
-        activities.removeIf(activity -> !activity.getCommute());
-        return activities;
-    }
 }
-
-

@@ -1,6 +1,6 @@
 package com.cycle_saver.utils;
 
-import com.cycle_saver.model.StravaToken;
+import com.cycle_saver.model.Strava.StravaToken;
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;

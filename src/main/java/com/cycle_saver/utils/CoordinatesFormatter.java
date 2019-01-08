@@ -1,7 +1,5 @@
 package com.cycle_saver.utils;
 
-import com.cycle_saver.model.Activity;
-
 import java.util.List;
 
 public class CoordinatesFormatter {

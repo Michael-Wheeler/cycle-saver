@@ -1,25 +1,20 @@
 package com.cycle_saver.model;
 
-import java.util.List;
+import com.cycle_saver.model.Strava.Activity;
+
+import java.time.LocalDateTime;
 
 public class Journey {
 
-    private int activity_id;
     private int totalCost;
-    private int duration;
+    private Activity activity;
+    private String start_latlng;
+    private String end_latlng;
+    private LocalDateTime startDateTime;
 
-    public Journey(int activity_id, int totalCost, int duration) {
-        this.activity_id = activity_id;
+    public Journey(Activity activity, int totalCost) {
+        this.activity = activity;
         this.totalCost = totalCost;
-        this.duration = duration;
-    }
-
-    public int getActivity_id() {
-        return activity_id;
-    }
-
-    public void setActivity_id(int activity_id) {
-        this.activity_id = activity_id;
     }
 
     public int getTotalCost() {
@@ -30,20 +25,35 @@ public class Journey {
         this.totalCost = totalCost;
     }
 
-    public int getDuration() {
-        return duration;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
-    @Override
-    public String toString() {
-        return "Journey{" +
-                "activity_id=" + activity_id +
-                ", totalCost=" + totalCost +
-                ", duration=" + duration +
-                '}';
+    public String getStart_latlng() {
+        return start_latlng;
+    }
+
+    public void setStart_latlng(String start_latlng) {
+        this.start_latlng = start_latlng;
+    }
+
+    public String getEnd_latlng() {
+        return end_latlng;
+    }
+
+    public void setEnd_latlng(String end_latlng) {
+        this.end_latlng = end_latlng;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startDateTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startDateTime = startTime;
     }
 }
