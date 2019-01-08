@@ -10,8 +10,8 @@ import com.cycle_saver.controller.ActivityVendor.StravaController;
 
 import java.util.List;
 
-public class StravaUser implements UserController {
-    public void createUser(String authCode) {
+public class StravaUser extends UserControllerimpl{
+    public User createUser(String authCode) {
         StravaAuthentication stravaAuthentication = new StravaAuthentication();
         StravaToken stravaToken = stravaAuthentication.getAccessToken(authCode);
 
@@ -26,5 +26,8 @@ public class StravaUser implements UserController {
         //TODO Move activity to journey calculations elsewhere?
         TFLController tfl = new TFLController();
         commuteActivities.forEach(activity -> user.addJourney(tfl.calculateJourney(activity)));
+        user.calculateTotalSavings();
+
+        return user;
     }
 }
