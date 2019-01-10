@@ -6,13 +6,15 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.cycle_saver.controller.user.UserAuthRequest;
+import com.cycle_saver.controller.user.UserCodec;
+import com.cycle_saver.dao.UserDao;
+import com.cycle_saver.dto.UserDto;
 import com.cycle_saver.model.security.Jwt;
 import com.cycle_saver.model.user.User;
 
 import javax.ws.rs.ForbiddenException;
 import java.util.Date;
 import java.util.UUID;
-
 /**
  * Simple class to provide some methods for authenticating and checking jwt tokens
  * for auth and obtaining users from requests
@@ -21,6 +23,11 @@ public class BaseController {
 
     private static final String issuer = "cyclesaver";
     protected static final String webUrl = "http://localhost:3000";
+    private UserDao userDao;
+
+    public BaseController() {
+
+    }
 
     /**
      * decode token and check user auth pass, returning user to system
@@ -75,25 +82,32 @@ public class BaseController {
     }
 
     protected User queryUser(User user) {
-        return queryUser(user.getId());
+        return UserCodec.fromDto(userDao.getUser(user.getId()));
     }
 
     protected User queryUser(int userId) {
-        User u = new User();
-        u.setId(userId);
-        return u;
+        return UserCodec.fromDto(userDao.getUser(userId));
     }
 
     User checkLogin(UserAuthRequest request) {
         // query on username/email and pw
-        User u = new User();
+        User u = null;
+        if (request.getUsername() != null) {
+            u = UserCodec.fromDto(userDao.getByName(request.getUsername()).get(0));
+        }
+        if (u == null && request.getEmail() != null) {
+            u = UserCodec.fromDto(userDao.getByEmail(request.getEmail()).get(0));
+        }
         return u;
     }
 
+    void insertUser(User user) {
+        UserDto dto = UserCodec.toDto(user);
+        userDao.addUser(dto);
+    }
+
     User queryUserByEmail(String email) {
-        User u = new User();
-        u.setEmail(email);
-        return u;
+        return UserCodec.fromDto(userDao.getByEmail(email).get(0));
     }
 
     public void invalidateToken(String jwt) {

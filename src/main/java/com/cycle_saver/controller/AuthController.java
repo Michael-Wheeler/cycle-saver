@@ -24,6 +24,7 @@ public class AuthController extends BaseController {
             // we have a new user! woohoo, add them
             u = new User();
             // add user via dao/dto layer
+            insertUser(u);
         } else {
             return Response.status(Response.Status.UNAUTHORIZED)
                     .entity(new LoginError(1, "User already exists")).build();
@@ -41,6 +42,7 @@ public class AuthController extends BaseController {
             // we have a new user! woohoo, add them
             u = new User();
             // add user via dao/dto layer
+            insertUser(u);
         } else {
             return Response.status(Response.Status.UNAUTHORIZED)
                     .entity(new LoginError(1, "User already exists")).build();
