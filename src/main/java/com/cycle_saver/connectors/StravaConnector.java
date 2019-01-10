@@ -81,11 +81,10 @@ public class StravaConnector {
         Athlete athlete = token.getAthlete();
         // store athlete info and add to user data
         // store token for later use
-        StravaToken stravaToken = parseAccessTokenResponse(accessTokenResponse);
-        return stravaToken;
+        return parseAccessTokenResponse(accessTokenResponse);
     }
 
-    public StravaToken parseAccessTokenResponse(String accessTokenResponse) {
+    private StravaToken parseAccessTokenResponse(String accessTokenResponse) {
         return new Gson().fromJson(accessTokenResponse, StravaToken.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.cycle_saver.controller;
+package com.cycle_saver.connectors;
 
 import com.cycle_saver.model.Strava.Activity;
 import com.cycle_saver.model.user.Journey;
@@ -51,12 +51,10 @@ public class TFLClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Journey journey = deserialezeJourneyResponse(output, activity);
-        return journey;
+        return deserialiseJourneyResponse(output, activity);
     }
 
-    private Journey deserialezeJourneyResponse(String response, Activity activity) {
+    private Journey deserialiseJourneyResponse(String response, Activity activity) {
         JSONObject jsonObject = new JSONObject(response);
         JSONArray journeys = jsonObject.getJSONArray("journeys");
         JSONObject journeyJSON = journeys.getJSONObject(0);

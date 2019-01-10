@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.cycle_saver.controller.user.UserAuthRequest;
 import com.cycle_saver.model.security.Jwt;
 import com.cycle_saver.model.user.User;
 
@@ -24,7 +25,7 @@ public class BaseController {
     /**
      * decode token and check user auth pass, returning user to system
      * @param token base64 encoded jwt token
-     * @return
+     * @return the User based on the jwt sent, else kick the requester out with a 401
      */
     public User checkAuth(String token) throws JWTVerificationException {
         token = extractToken(token);
@@ -52,11 +53,7 @@ public class BaseController {
      * @param user Successfully logged in user
      * @return a base64 encoded, signed jwt containing user info in payload for FE
      */
-    public String provideToken(User user, boolean checkUserExists) {
-        // check user exists, based on provided credentials
-        if (checkUserExists) {
-            user = queryUser(user);
-        }
+    String provideToken(User user) {
         String salt = UUID.randomUUID().toString();
         Algorithm algorithm = Algorithm.HMAC256(salt);
         String id = UUID.randomUUID().toString();
@@ -77,13 +74,25 @@ public class BaseController {
         return jwt;
     }
 
-    public User queryUser(User user) {
+    protected User queryUser(User user) {
         return queryUser(user.getId());
     }
 
-    public User queryUser(int userId) {
+    protected User queryUser(int userId) {
         User u = new User();
         u.setId(userId);
+        return u;
+    }
+
+    User checkLogin(UserAuthRequest request) {
+        // query on username/email and pw
+        User u = new User();
+        return u;
+    }
+
+    User queryUserByEmail(String email) {
+        User u = new User();
+        u.setEmail(email);
         return u;
     }
 
