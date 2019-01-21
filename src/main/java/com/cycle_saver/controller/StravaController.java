@@ -39,7 +39,7 @@ public class StravaController {
             uri = new URIBuilder()
                     .setScheme("https")
                     .setHost("www.strava.com")
-                    .setPath("/api/v3/athletes/" + user.getAthleteId() + "/activities")
+                    .setPath("/api/v3/athletes/" + user.getAthlete().getId() + "/activities")
                     .setParameter("access_token", user.getToken())
                     .build();
         } catch (URISyntaxException e) {

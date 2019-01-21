@@ -1,7 +1,5 @@
 package com.cycle_saver.model;
 
-import java.util.List;
-
 public class Journey {
 
     private int activity_id;

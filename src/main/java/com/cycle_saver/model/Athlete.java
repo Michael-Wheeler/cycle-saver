@@ -1,68 +1,45 @@
 package com.cycle_saver.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 
 public class Athlete {
 
-    @SerializedName("id")
-    @Expose
     private Integer id;
-    @SerializedName("username")
-    @Expose
-    private Object username;
-    @SerializedName("resource_state")
-    @Expose
+
+    private String username;
+
     private Integer resourceState;
-    @SerializedName("firstname")
-    @Expose
+
     private String firstname;
-    @SerializedName("lastname")
-    @Expose
+
     private String lastname;
-    @SerializedName("city")
-    @Expose
+
     private String city;
-    @SerializedName("state")
-    @Expose
+
     private String state;
-    @SerializedName("country")
-    @Expose
+
     private String country;
-    @SerializedName("sex")
-    @Expose
+
     private String sex;
-    @SerializedName("premium")
-    @Expose
+
     private Boolean premium;
-    @SerializedName("summit")
-    @Expose
+
     private Boolean summit;
-    @SerializedName("created_at")
-    @Expose
+
     private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
+
     private String updatedAt;
-    @SerializedName("badge_type_id")
-    @Expose
+
     private Integer badgeTypeId;
-    @SerializedName("profile_medium")
-    @Expose
+
     private String profileMedium;
-    @SerializedName("profile")
-    @Expose
+
     private String profile;
-    @SerializedName("friend")
-    @Expose
-    private Object friend;
-    @SerializedName("follower")
-    @Expose
-    private Object follower;
-    @SerializedName("email")
-    @Expose
+
+    private String friend;
+
+    private String follower;
+
     private String email;
 
     private ArrayList<Activity> activities;
@@ -85,11 +62,11 @@ public class Athlete {
         this.id = id;
     }
 
-    public Object getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(Object username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -205,19 +182,19 @@ public class Athlete {
         this.profile = profile;
     }
 
-    public Object getFriend() {
+    public String getFriend() {
         return friend;
     }
 
-    public void setFriend(Object friend) {
+    public void setFriend(String friend) {
         this.friend = friend;
     }
 
-    public Object getFollower() {
+    public String getFollower() {
         return follower;
     }
 
-    public void setFollower(Object follower) {
+    public void setFollower(String follower) {
         this.follower = follower;
     }
 

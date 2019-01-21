@@ -19,8 +19,10 @@ package com.cycle_saver;
 import com.cycle_saver.controller.StravaAuthController;
 import com.cycle_saver.controller.StravaController;
 import com.cycle_saver.controller.TFLController;
-import com.cycle_saver.model.*;
-
+import com.cycle_saver.model.Activity;
+import com.cycle_saver.model.Athlete;
+import com.cycle_saver.model.StravaToken;
+import com.cycle_saver.model.User;
 import com.cycle_saver.service.UserDataService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,8 +32,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 @Controller
 @SpringBootApplication
@@ -55,18 +55,20 @@ public class Main {
         StravaToken token = stravaAuthController.getAccessToken(code);
 
         //add user to mongo
-        User user = new User(token.getAthlete().getId(), token.getAccessToken());
+        User user = new User(token.getAthlete(), token.getAccessToken());
         UserDataService userDataService = new UserDataService();
-        userDataService.addUser(user);
+        User userMongo = userDataService.addUser(user);
+        System.out.println("MONGO USER " + userMongo.toString());
         Athlete athlete = token.getAthlete();
         StravaController stravaController = new StravaController();
-        List<Activity> commuteActivities = stravaController.getCommutes(user);
+        List<Activity> commuteActivities = stravaController.getCommutes(userMongo);
 
         TFLController tfl = new TFLController();
-        athlete.getActivities().forEach(activity -> user.addJourney(tfl.calculateJourney(
+        athlete.getActivities().forEach(activity -> userMongo.addJourney(tfl.calculateJourney(
                 activity,
                 "421beaf3651ef6dcea93a05e0bb3dd86",
                 "621b4307")));
+        userDataService.updateUserJourneys(userMongo);
         return "auth_strava";
     }
 

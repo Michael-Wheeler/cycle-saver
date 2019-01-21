@@ -1,160 +1,107 @@
 package com.cycle_saver.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Activity {
 
-        @SerializedName("resource_state")
-        @Expose
         private Integer resourceState;
-        @SerializedName("athlete")
-        @Expose
+
         private Athlete athlete;
-        @SerializedName("name")
-        @Expose
+
         private String name;
-        @SerializedName("distance")
-        @Expose
+
         private Double distance;
-        @SerializedName("moving_time")
-        @Expose
+
         private Integer movingTime;
-        @SerializedName("elapsed_time")
-        @Expose
+
         private Integer elapsedTime;
-        @SerializedName("total_elevation_gain")
-        @Expose
+
         private Double totalElevationGain;
-        @SerializedName("type")
-        @Expose
+
         private String type;
-        @SerializedName("workout_type")
-        @Expose
-        private Object workoutType;
-        @SerializedName("id")
-        @Expose
+
+        private String workoutType;
+
         private Integer id;
-        @SerializedName("external_id")
-        @Expose
+
         private String externalId;
-        @SerializedName("upload_id")
-        @Expose
+
         private Integer uploadId;
-        @SerializedName("start_date")
-        @Expose
+
         private String startDate;
-        @SerializedName("start_date_local")
-        @Expose
+
         private String startDateLocal;
-        @SerializedName("timezone")
-        @Expose
+
         private String timezone;
-        @SerializedName("utc_offset")
-        @Expose
+
         private Integer utcOffset;
-        @SerializedName("start_latlng")
-        @Expose
+
         private List<Double> startLatlng = null;
-        @SerializedName("end_latlng")
-        @Expose
+
         private List<Double> endLatlng = null;
-        @SerializedName("location_city")
-        @Expose
-        private Object locationCity;
-        @SerializedName("location_state")
-        @Expose
-        private Object locationState;
-        @SerializedName("location_country")
-        @Expose
+
+        private String locationCity;
+
+        private String locationState;
+
         private String locationCountry;
-        @SerializedName("start_latitude")
-        @Expose
+
         private Double startLatitude;
-        @SerializedName("start_longitude")
-        @Expose
+
         private Double startLongitude;
-        @SerializedName("achievement_count")
-        @Expose
+
         private Integer achievementCount;
-        @SerializedName("kudos_count")
-        @Expose
+
         private Integer kudosCount;
-        @SerializedName("comment_count")
-        @Expose
+
         private Integer commentCount;
-        @SerializedName("athlete_count")
-        @Expose
+
         private Integer athleteCount;
-        @SerializedName("photo_count")
-        @Expose
+
         private Integer photoCount;
-        @SerializedName("map")
-        @Expose
+
         private Map map;
-        @SerializedName("trainer")
-        @Expose
+
         private Boolean trainer;
-        @SerializedName("commute")
-        @Expose
+
         private Boolean commute;
-        @SerializedName("manual")
-        @Expose
+
         private Boolean manual;
-        @SerializedName("private")
-        @Expose
+
         private Boolean _private;
-        @SerializedName("visibility")
-        @Expose
+
         private String visibility;
-        @SerializedName("flagged")
-        @Expose
+
         private Boolean flagged;
-        @SerializedName("gear_id")
-        @Expose
+
         private String gearId;
-        @SerializedName("from_accepted_tag")
-        @Expose
+
         private Boolean fromAcceptedTag;
-        @SerializedName("average_speed")
-        @Expose
+
         private Double averageSpeed;
-        @SerializedName("max_speed")
-        @Expose
+
         private Double maxSpeed;
-        @SerializedName("average_watts")
-        @Expose
+
         private Double averageWatts;
-        @SerializedName("kilojoules")
-        @Expose
+
         private Double kilojoules;
-        @SerializedName("device_watts")
-        @Expose
+
         private Boolean deviceWatts;
-        @SerializedName("has_heartrate")
-        @Expose
+
         private Boolean hasHeartrate;
-        @SerializedName("heartrate_opt_out")
-        @Expose
+
         private Boolean heartrateOptOut;
-        @SerializedName("display_hide_heartrate_option")
-        @Expose
+
         private Boolean displayHideHeartrateOption;
-        @SerializedName("elev_high")
-        @Expose
+
         private Double elevHigh;
-        @SerializedName("elev_low")
-        @Expose
+
         private Double elevLow;
-        @SerializedName("pr_count")
-        @Expose
+
         private Integer prCount;
-        @SerializedName("total_photo_count")
-        @Expose
+
         private Integer totalPhotoCount;
-        @SerializedName("has_kudoed")
-        @Expose
+
         private Boolean hasKudoed;
 
         public Integer getResourceState() {
@@ -221,11 +168,11 @@ public class Activity {
             this.type = type;
         }
 
-        public Object getWorkoutType() {
+        public String getWorkoutType() {
             return workoutType;
         }
 
-        public void setWorkoutType(Object workoutType) {
+        public void setWorkoutType(String workoutType) {
             this.workoutType = workoutType;
         }
 
@@ -301,19 +248,19 @@ public class Activity {
             this.endLatlng = endLatlng;
         }
 
-        public Object getLocationCity() {
+        public String getLocationCity() {
             return locationCity;
         }
 
-        public void setLocationCity(Object locationCity) {
+        public void setLocationCity(String locationCity) {
             this.locationCity = locationCity;
         }
 
-        public Object getLocationState() {
+        public String getLocationState() {
             return locationState;
         }
 
-        public void setLocationState(Object locationState) {
+        public void setLocationState(String locationState) {
             this.locationState = locationState;
         }
 
