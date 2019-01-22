@@ -65,7 +65,7 @@ public class BaseController {
         systemJwt.setIssued(new Date());
         systemJwt.setExpiry(new Date(new Date().getTime() + 3600000));
         systemJwt.setId(id);
-        systemJwt.setUserId(user.getId());
+        systemJwt.setUserId(user.getId().in);
         systemJwt.setSalt(salt);
         String jwt = JWT.create()
                 .withIssuer(issuer)

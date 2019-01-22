@@ -1,19 +1,28 @@
 package com.cycle_saver.model.user;
 
-import com.cycle_saver.model.Strava.Activity;
+import com.cycle_saver.model.strava.Activity;
 
 import java.time.LocalDateTime;
 
+import org.bson.types.ObjectId;
+
 public class Journey {
 
+    private ObjectId id;
+    private String userId;
     private int totalCost;
     private Activity activity;
-    private String start_latlng;
-    private String end_latlng;
+    private String startLatLng;
+    private String endLatLng;
     private LocalDateTime startDateTime;
 
     public Journey(Activity activity, int totalCost) {
         this.activity = activity;
+        this.totalCost = totalCost;
+    }
+
+    public Journey(String userId, int totalCost) {
+        this.userId = userId;
         this.totalCost = totalCost;
     }
 
@@ -33,20 +42,20 @@ public class Journey {
         this.activity = activity;
     }
 
-    public String getStart_latlng() {
-        return start_latlng;
+    public String getStartLatLng() {
+        return startLatLng;
     }
 
-    public void setStart_latlng(String start_latlng) {
-        this.start_latlng = start_latlng;
+    public void setStartLatLng(String startLatLng) {
+        this.startLatLng = startLatLng;
     }
 
-    public String getEnd_latlng() {
-        return end_latlng;
+    public String getEndLatLng() {
+        return endLatLng;
     }
 
-    public void setEnd_latlng(String end_latlng) {
-        this.end_latlng = end_latlng;
+    public void setEndLatLng(String endLatLng) {
+        this.endLatLng = endLatLng;
     }
 
     public LocalDateTime getStartTime() {
@@ -56,4 +65,12 @@ public class Journey {
     public void setStartTime(LocalDateTime startTime) {
         this.startDateTime = startTime;
     }
+
+    public ObjectId getId() { return id; }
+
+    public void setId(ObjectId id) { this.id = id; }
+
+    public String getUserId() { return userId; }
+
+    public void setUserId(String userId) { this.userId = userId; }
 }

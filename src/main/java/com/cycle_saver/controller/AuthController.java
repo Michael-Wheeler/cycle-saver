@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 @RestController
 @RequestMapping("/user")
 public class AuthController extends BaseController {
-
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public Response signUp(String body) {
         Gson gson = new Gson();

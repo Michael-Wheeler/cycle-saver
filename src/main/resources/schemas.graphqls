@@ -1,0 +1,29 @@
+schema {
+    query: Query
+}
+
+type Query {
+    users: [User]
+    user(id: String): User
+}
+
+type User {
+    id: String
+    journeys: [Journey]
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+    athlete: Athlete
+    profileUrl: String
+    stravaAccessToken: String
+}
+
+type Journey {
+   id: String
+   totalCost: int
+   activity: Activity
+   startLatLng: String
+   endLatLng: String
+   startDateTime: LocalDateTime
+}

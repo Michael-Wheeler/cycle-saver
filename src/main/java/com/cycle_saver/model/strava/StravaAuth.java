@@ -1,4 +1,4 @@
-package com.cycle_saver.model.Strava;
+package com.cycle_saver.model.strava;
 
 public class StravaAuth {
 

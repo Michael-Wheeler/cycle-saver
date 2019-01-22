@@ -3,11 +3,13 @@ package com.cycle_saver.controller.strava;
 import com.cycle_saver.connectors.StravaConnector;
 import com.cycle_saver.connectors.TFLConnector;
 import com.cycle_saver.controller.BaseController;
-import com.cycle_saver.model.Strava.Activity;
-import com.cycle_saver.model.Strava.Athlete;
-import com.cycle_saver.model.Strava.StravaAuth;
-import com.cycle_saver.model.Strava.StravaToken;
+import com.cycle_saver.model.strava.Activity;
+import com.cycle_saver.model.strava.Athlete;
+import com.cycle_saver.model.strava.StravaAuth;
+import com.cycle_saver.model.strava.StravaToken;
+import com.cycle_saver.model.user.Journey;
 import com.cycle_saver.model.user.User;
+import com.cycle_saver.repositories.JourneyRepository;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +22,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 @RestController
@@ -57,7 +58,7 @@ public class StravaController extends BaseController {
             User u = null;
             if (state != null) {
                 StravaState stravaState = new Gson().fromJson(new String(Base64.getDecoder().decode(state)), StravaState.class);
-                u = queryUser(stravaState.getUserId());
+                //u = queryUser(stravaState.getUserId());
             }
             if (u == null) {
                 // new user signed up from Strava!
@@ -70,32 +71,41 @@ public class StravaController extends BaseController {
 
             // update our record of user with strava info
             u.setAthlete(athlete);
+            u.setStravaAccessToken(token.getAccessToken());
 
             // update user with journeys
             List<Activity> activities = stravaConnector.getActivities(athlete.getId(), token.getAccessToken());
-            filterCommutes(athlete);
+            filterCommutes(activities);
             TFLConnector tflController = new TFLConnector();
             for (Activity activity : activities) {
                 try {
-                    u.addJourney(tflController.buildJourney(activity));
+                    //TODO Add journey to DB
+                    u.setJourneyIds(Arrays.asList(tflController.buildJourney(activity).getId().toHexString()));
                 } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }
             }
 
             // return athlete info to display on FE
-            return Response.status(302).location(new URI(webUrl)).build();
+            //TODO Replace hardcoded url with 'webUrl'
+            return Response.status(302).location(new URI("http://localhost:3000")).build();
         } catch (URISyntaxException u) {
             logger.severe("Failed to set uri: " + u.getMessage());
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
 
-    private void filterCommutes(Athlete athlete) {
-        athlete.getActivities().removeIf(activity -> !activity.getCommute());
-        //TODO Remove
-        athlete.getActivities().forEach(activity -> System.out.println("Is Commute? " + activity.getCommute() + "   Activity Name: " + activity.getName() + "\n"));
+    private List<Activity> filterCommutes(List<Activity> activities) {
+        Iterator<Activity> i = activities.iterator();
+        while (i.hasNext()) {
+            Activity activity = i.next();
+            if (!activity.getCommute()) {
+                i.remove();
+            }
+        }
+        return activities;
     }
+
 }
 
 

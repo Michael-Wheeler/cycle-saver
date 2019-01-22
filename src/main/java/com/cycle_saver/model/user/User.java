@@ -1,40 +1,39 @@
 package com.cycle_saver.model.user;
 
-import com.cycle_saver.model.Strava.Athlete;
+import com.cycle_saver.model.strava.Athlete;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import org.bson.types.ObjectId;
 
 public class User {
-    private ArrayList<Journey> journeys;
 
-    public User(ArrayList<Journey> journeys) {
-        this.journeys = journeys;
-    }
-
-    public User() {
-        this.journeys = new ArrayList<Journey>();
-    }
-
-    public ArrayList<Journey> getJourneys() {
-        return journeys;
-    }
-
-    public void addJourney(Journey journey) {
-        this.journeys.add(journey);
-    }
-
-    public void setJourneys(ArrayList<Journey> journeys) {
-        this.journeys = journeys;
-    }
-
-    private int id;
+    private ObjectId id;
+    private List<String> journeyIds;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private Athlete athlete;
     private String profileUrl;
-    private String stravaAthleteToken;
+    private String stravaAccessToken;
+
+    //TODO Remove this after testing
+    public User(String stravaAccessToken) {
+        this.stravaAccessToken = stravaAccessToken;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(Athlete athlete, String stravaAccessToken) {
+        this.athlete = athlete;
+        this.stravaAccessToken = stravaAccessToken;
+    }
+
+    public User() {}
 
     public String getFirstName() {
         return firstName;
@@ -76,12 +75,12 @@ public class User {
         this.athlete = athlete;
     }
 
-    public String getStravaAthleteToken() {
-        return stravaAthleteToken;
+    public String getStravaAccessToken() {
+        return stravaAccessToken;
     }
 
-    public void setStravaAthleteToken(String stravaAthleteToken) {
-        this.stravaAthleteToken = stravaAthleteToken;
+    public void setStravaAccessToken(String stravaAccessToken) {
+        this.stravaAccessToken = stravaAccessToken;
     }
 
     public String getProfileUrl() {
@@ -92,11 +91,13 @@ public class User {
         this.profileUrl = profileUrl;
     }
 
-    public int getId() {
-        return id;
-    }
+    public ObjectId getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(ObjectId id) { this.id = id; }
+
+    public List<String> getJourneyIds() { return journeyIds; }
+
+    public void setJourneyIds(List<String> journeyIds) { this.journeyIds = journeyIds; }
+
+    //public void setJourneyId(String journeyId) {this.journeyIds.add(journeyId); }
 }

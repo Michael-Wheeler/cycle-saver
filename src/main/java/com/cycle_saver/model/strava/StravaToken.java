@@ -1,6 +1,5 @@
-package com.cycle_saver.model.Strava;
+package com.cycle_saver.model.strava;
 
-import com.cycle_saver.model.Strava.Athlete;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

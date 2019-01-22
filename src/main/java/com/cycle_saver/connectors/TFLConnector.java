@@ -1,6 +1,6 @@
 package com.cycle_saver.connectors;
 
-import com.cycle_saver.model.Strava.Activity;
+import com.cycle_saver.model.strava.Activity;
 import com.cycle_saver.model.user.Journey;
 import com.cycle_saver.utils.CoordinatesFormatter;
 import org.apache.commons.io.IOUtils;
@@ -9,7 +9,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;

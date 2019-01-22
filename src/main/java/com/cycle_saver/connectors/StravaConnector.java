@@ -1,7 +1,7 @@
 package com.cycle_saver.connectors;
 
-import com.cycle_saver.model.Strava.Activity;
-import com.cycle_saver.model.Strava.StravaToken;
+import com.cycle_saver.model.strava.Activity;
+import com.cycle_saver.model.strava.StravaToken;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
