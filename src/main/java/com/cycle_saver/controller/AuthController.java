@@ -17,7 +17,9 @@ public class AuthController extends BaseController {
         Gson gson = new Gson();
         User user = gson.fromJson(body, User.class);
         // check if user already exists, add them or send error
-        User u = queryUser(user);
+        //User u = queryUser(user);
+        //TODO Remove this
+        User u = new User("0000001");
         if (u == null) {
             // we have a new user! woohoo, add them
         } else {

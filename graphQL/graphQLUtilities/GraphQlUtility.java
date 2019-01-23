@@ -1,5 +1,6 @@
 package com.cycle_saver.graphQLUtilities;
 
+import com.cycle_saver.dataFetchers.AllUsersDataFetcher;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -21,23 +22,24 @@ import static graphql.GraphQL.newGraphQL;
 import static graphql.schema.idl.RuntimeWiring.newRuntimeWiring;
 
 @Component
-public class GraphQLUtility {
+public class GraphQlUtility {
 
     @Value("classpath:schemas.graphqls")
     private Resource schemaResource;
     private GraphQL graphQL;
     private UserDataFetcher userDataFetcher;
     private JourneysDataFetcher journeysDataFetcher;
+    private AllUsersDataFetcher allUsersDataFetcher;
 
     @Autowired
-    GraphQLUtility(UserDataFetcher userDataFetcher,
+    GraphQlUtility(UserDataFetcher userDataFetcher,
                    JourneysDataFetcher journeysDataFetcher) throws IOException {
         this.userDataFetcher = userDataFetcher;
         this.journeysDataFetcher = journeysDataFetcher;
     }
 
     @PostConstruct
-    public GraphQL createGraphQLObject() throws IOException {
+    public GraphQL createGraphQlObject() throws IOException {
         File schemas = schemaResource.getFile();
         TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(schemas);
         RuntimeWiring wiring = buildRuntimeWiring();
@@ -48,6 +50,7 @@ public class GraphQLUtility {
     public RuntimeWiring buildRuntimeWiring(){
         return newRuntimeWiring()
                 .type("Query", typeWiring -> typeWiring
+                        .dataFetcher("users", allUsersDataFetcher)
                         .dataFetcher("user", userDataFetcher))
                 .type("User", typeWiring -> typeWiring
                         .dataFetcher("journeys", journeysDataFetcher))

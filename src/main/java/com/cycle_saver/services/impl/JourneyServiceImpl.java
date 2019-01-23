@@ -1,4 +1,4 @@
-package com.cycle_saver.services.implementation;
+package com.cycle_saver.services.impl;
 
 import com.cycle_saver.model.user.Journey;
 import com.cycle_saver.repositories.JourneyRepository;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class JourneyServiceImpl implements JourneyService {
     private final JourneyRepository journeyRepository;
 

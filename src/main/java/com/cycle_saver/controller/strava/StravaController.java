@@ -80,7 +80,7 @@ public class StravaController extends BaseController {
             for (Activity activity : activities) {
                 try {
                     //TODO Add journey to DB
-                    u.setJourneyIds(Arrays.asList(tflController.buildJourney(activity).getId().toHexString()));
+                    u.setJourneyIds(Arrays.asList(tflController.buildJourney(activity).getId()));
                 } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }

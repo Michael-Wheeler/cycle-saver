@@ -1,8 +1,0 @@
-server:
-  port: 5000
-spring:
-  data:
-    mongodb:
-      database: cyclesaver
-      host: localhost
-      port: 27017

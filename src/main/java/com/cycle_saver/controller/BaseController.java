@@ -7,6 +7,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.cycle_saver.model.security.Jwt;
 import com.cycle_saver.model.user.User;
+import com.cycle_saver.services.UserService;
+import com.cycle_saver.services.impl.UserServiceImpl;
 
 import javax.ws.rs.ForbiddenException;
 import java.util.Date;
@@ -39,7 +41,8 @@ public class BaseController {
         verifier.verify(token);
         int userId = jwt.getClaim("user").asInt();
         // query user on user id
-        User user = queryUser(userId);
+        //TODO Remove this
+        User user = new User("00000000000");
         if (user == null) {
             throw new ForbiddenException("Invalid token");
         }
@@ -55,7 +58,7 @@ public class BaseController {
     public String provideToken(User user, boolean checkUserExists) {
         // check user exists, based on provided credentials
         if (checkUserExists) {
-            user = queryUser(user);
+            //user = queryUser(user);
         }
         String salt = UUID.randomUUID().toString();
         Algorithm algorithm = Algorithm.HMAC256(salt);
@@ -65,7 +68,7 @@ public class BaseController {
         systemJwt.setIssued(new Date());
         systemJwt.setExpiry(new Date(new Date().getTime() + 3600000));
         systemJwt.setId(id);
-        systemJwt.setUserId(user.getId().in);
+        //systemJwt.setUserId(user.getId());
         systemJwt.setSalt(salt);
         String jwt = JWT.create()
                 .withIssuer(issuer)
@@ -77,15 +80,15 @@ public class BaseController {
         return jwt;
     }
 
-    public User queryUser(User user) {
-        return queryUser(user.getId());
-    }
+//    public User queryUser(User user) {
+//        return queryUser(user.getId());
+//    }
 
-    public User queryUser(int userId) {
-        User u = new User();
-        u.setId(userId);
-        return u;
-    }
+//    public User queryUser(int userId) {
+//        User u = new User();
+//        u.setId(userId);
+//        return u;
+//    }
 
     public void invalidateToken(String jwt) {
         jwt = extractToken(jwt);
