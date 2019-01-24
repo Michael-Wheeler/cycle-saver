@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface JourneyService {
     List<Journey> findAllUserJourneys(List<String> userId);
+    List<Journey> saveAll(List<Journey> journeys);
 }

@@ -2,6 +2,7 @@ package com.cycle_saver.model.user;
 
 import com.cycle_saver.model.strava.Athlete;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -9,7 +10,7 @@ import org.bson.types.ObjectId;
 public class User {
 
     private ObjectId id;
-    private List<String> journeyIds;
+    private List<String> journeyIds = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String email;
@@ -91,6 +92,8 @@ public class User {
         this.profileUrl = profileUrl;
     }
 
+    public ObjectId getObjectId() { return id; }
+
     public String getId() { return id.toHexString(); }
 
     public void setId(ObjectId id) { this.id = id; }
@@ -99,5 +102,5 @@ public class User {
 
     public void setJourneyIds(List<String> journeyIds) { this.journeyIds = journeyIds; }
 
-    //public void setJourneyId(String journeyId) {this.journeyIds.add(journeyId); }
+    public void addJourneyId(String journeyId) {this.journeyIds.add(journeyId); }
 }

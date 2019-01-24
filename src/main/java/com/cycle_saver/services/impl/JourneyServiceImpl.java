@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class JourneyServiceImpl implements JourneyService {
-    private final JourneyRepository journeyRepository;
-
     @Autowired
-    JourneyServiceImpl(JourneyRepository journeyRepository) {
-        this.journeyRepository = journeyRepository;
+    private JourneyRepository journeyRepository;
+
+//    JourneyServiceImpl(JourneyRepository journeyRepository) {
+//        this.journeyRepository = journeyRepository;
+//    }
+
+    @Override
+    public List<Journey> saveAll(List<Journey> journeys) {
+        return journeyRepository.saveAll(journeys);
     }
 
     @Override

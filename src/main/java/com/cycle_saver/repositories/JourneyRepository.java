@@ -1,11 +1,12 @@
 package com.cycle_saver.repositories;
 
 import com.cycle_saver.model.user.Journey;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface JourneyRepository extends MongoRepository<Journey, ObjectId> {
+@Repository
+public interface JourneyRepository extends MongoRepository<Journey, String> {
     List<Journey> findByIdIn(List<String> ids);
 }
