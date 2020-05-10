@@ -33,8 +33,8 @@ public class StravaConnector {
         HttpPost httppost = new HttpPost("https://www.strava.com/oauth/token");
         List<NameValuePair> params = new ArrayList<NameValuePair>(3);
         //TODO Remove Strava secrets
-        params.add(new BasicNameValuePair("client_id", "28817"));
-        params.add(new BasicNameValuePair("client_secret", "f0949137a6f81f4748fedfe204b28c7d02bfb46e"));
+        params.add(new BasicNameValuePair("client_id", client_id));
+        params.add(new BasicNameValuePair("client_secret", client_secret));
         params.add(new BasicNameValuePair("code", authCode));
         httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
         HttpResponse response = httpclient.execute(httppost);
